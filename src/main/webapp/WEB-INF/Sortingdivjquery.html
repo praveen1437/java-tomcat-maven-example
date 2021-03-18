@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SortDiv</title>
+</head>
+<body>
+<div class="sortmain">
+<div id='div_1' class="sortsubdiv">1
+    <div id='div_1_0'>first inner div
+        <input type="button" value="moveUpOrDown" onclick="moveUpOrDown('1','0','down')"></div>
+    <div id='div_1_1'> second inner div <input type="button" class="far fa-arrow-alt-circle-down" onclick="moveUpOrDown('1','1','up')"></div>
+</div>
+<div id='div_2' class="sortsubdiv">2
+    <div id='div_2_0' class="unsortable">main div not sortable</div>
+    <div id='div_2_1'>
+        <textarea id="textArea21">firstDivContent</textarea> </div>
+    <div id='div_2_2'>
+        <textarea id="textArea22">secondDivContent</textarea>
+    </div>
+    <div id='div_2_3'>
+        <textarea id="textArea23">ThirdDivContent</textarea>
+    </div>
+    <div id='div_2_4'>
+        <textarea id="textArea24">FourthDivContent</textarea>
+    </div>
+    <div id='div_2_5'>
+        <textarea id="textArea25">FifthDivContent</textarea>
+    </div>
+
+</div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+</script>
+<script
+        src="http://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script
+        src="http://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script>
+<script>
+$('.sortmain').sortable();
+var startindex;
+var endIndex;
+var parentIndex;
+$(".sortsubdiv").sortable({
+      items: "div:not(.unsortable)",
+      start: function(event, ui) {
+      var element_id = ui.item.attr('id');
+      console.log("id : " + element_id );
+      console.log("item start : " + Object.values(ui.item));
+        startindex = element_id.split("_")[2];
+    },
+    stop: function(event, ui) {
+    console.log("item end : " + Object.values(ui.item) );
+        var element_id = ui.item.attr('id');
+        parentIndex = element_id.split("_")[1];
+        var element_id =  ui.item.prev().attr("id")
+        endIndex = element_id.split("_")[2];
+        console.log("Start position: " + startindex);
+        console.log("endIndex: " + endIndex);
+        console.log("parentIndex : " + parentIndex);
+        console.log("elementId : " + element_id);
+        updateCount(startindex,endIndex,parentIndex);
+    }
+
+    });
+
+    function updateCount(old,newindex,parentIndex) {
+    console.log("Start position: " + old);
+    console.log("New position: " + newindex);
+    console.log("parentIndex: " + parentIndex);
+    var newContent = $("#textArea"+parentIndex+old).val();
+    var oldContent = $("#textArea"+parentIndex+newindex).val();
+    //in this need to change ids, cause data being shifted by sort functionality
+
+    }
+</script>
+</body>
+</html>

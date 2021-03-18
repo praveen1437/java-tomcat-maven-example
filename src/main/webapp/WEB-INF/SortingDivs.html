@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>divmovement</title>
+</head>
+<body>
+<div id='div_1'>1
+    <div id='div_10'>first inner div
+        <input type="button" value="moveUpOrDown" onclick="moveUpOrDown('1','0','down')"></div>
+    <div id='div_11'> second inner div <input type="button" class="far fa-arrow-alt-circle-down" onclick="moveUpOrDown('1','1','up')"></div>
+</div>
+<div id='div_2'>2
+    <div id='div_20' style="">
+        <p id="textArea20">firstDivContent</p>
+        <input type="button" value="moveDown" onclick="moveUpOrDown('2','0','down')"></div>
+    <div id='div_21'>
+        <p id="textArea21">secondDivContent</p>
+        <input type="button" value="moveUpOrDown" onclick="moveUpOrDown('2','1','up')">
+        <input type="button" value="moveDown" onclick="moveUpOrDown('2','1','down')">
+    </div>
+    <div id='div_22'>
+        <textarea id="textArea22">ThirdDivContent</textarea>
+        <input type="button" value="moveUpOrDown" onclick="moveUpOrDown('2','2','up')">
+        <input type="button" value="moveDown" onclick="moveUpOrDown('2','2','down')">
+    </div>
+    <div id='div_23'>
+        <textarea id="textArea23">FourthDivContent</textarea>
+        <input type="button" value="moveUpOrDown" onclick="moveUpOrDown('2','3','up')">
+        <input type="button" value="moveDown" onclick="moveUpOrDown('2','3','down')">
+    </div>
+    <div id='div_24'>
+        <textarea id="textArea24">FifthDivContent</textarea>
+        <input type="button" value="moveUpOrDown" onclick="moveUpOrDown('2','4','up')">
+    </div>
+
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    function moveUpOrDown(parentIndex,childIndex,move){
+     console.log("in move up");
+     var x = $("#div_"+parentIndex+childIndex).index();
+     console.log("in move up " + x);
+     currentDivContent = $("#textArea"+parentIndex+childIndex).text();
+     console.log("currentDiVcONTENT" + currentDivContent);
+     var newchildIndex = parseInt(childIndex) + 1;
+     if(move == 'down') {
+     var newchildIndex = parseInt(childIndex) + 1;
+     }
+      if(move == 'up') {
+    var newchildIndex = parseInt(childIndex) - 1;
+    }
+     console.log("child index " + newchildIndex);
+     nextDivContent = $("#textArea"+parentIndex+newchildIndex).text();
+     console.log("nextDivContent" + nextDivContent);
+      $("#textArea"+parentIndex+childIndex).text(nextDivContent);
+      $("#textArea"+parentIndex+newchildIndex).text(currentDivContent);
+// in this data should be replaced,we r not at all moving divs
+    }
+
+</script>
+
+</body>
+</html>
